@@ -102,7 +102,7 @@ public class Tiger extends Animal{
 
     @Override
     protected int getMaxAge() {
-        return 150;
+        return 200;
     }
 
     @Override
@@ -117,7 +117,7 @@ public class Tiger extends Animal{
 
     @Override
     protected int getBreedingAge() {
-        return 15;
+        return 30;
     }
 
 }
