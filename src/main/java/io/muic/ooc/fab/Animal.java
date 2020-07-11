@@ -6,13 +6,12 @@ import java.util.Random;
 public abstract class Animal {
 
     protected static final Random RANDOM = new Random();
-    // Whether the animal is alive or not.
-    // The fox's position.
-    private Location location;
-    // The field occupied.
-    protected Field field;
-    private int age = 0;
 
+    private Location location;
+
+    protected Field field;
+
+    private int age = 0;
 
     private boolean alive = true;
 
@@ -30,31 +29,19 @@ public abstract class Animal {
         incrementAge();
         if (isAlive()) {
             giveBirth(newAnimals);
-            // Try to move into a free location.
             Location newLocation = movetoNewLocation();
-
             if (newLocation != null) {
                 setLocation(newLocation);
             } else {
-                // Overcrowding.
                 setDead();
             }
         }
     }
 
-    /**
-     * Check whether the animal is alive or not.
-     *
-     * @return true if the animal is still alive.
-     */
     public boolean isAlive() {
         return alive;
     }
 
-    /**
-     * Indicate that the rabbit is no longer alive. It is removed from the
-     * field.
-     */
     protected void setDead() {
         alive = false;
         if (location != null) {
@@ -68,11 +55,6 @@ public abstract class Animal {
         return location;
     }
 
-    /**
-     * Place the rabbit at the new location in the given field.
-     *
-     * @param newLocation The rabbit's new location.
-     */
     protected void setLocation(Location newLocation) {
         if (location != null) {
             field.clear(location);
@@ -81,22 +63,15 @@ public abstract class Animal {
         field.place(this, newLocation);
     }
 
-    protected abstract int getMaxAge();
 
-    /**
-     * Increase the age. This could result in the fox's death.
-     */
-    protected void incrementAge() {
+    private void incrementAge() {
         age++;
         if (age > getMaxAge()) {
             setDead();
         }
     }
-    /**
-     * Generate a number representing the number of births, if it can breed.
-     *
-     * @return The number of births (may be zero).
-     */
+
+    protected abstract int getMaxAge();
 
     protected abstract double getBreedingProbability();
 
@@ -104,7 +79,7 @@ public abstract class Animal {
 
     protected abstract int getBreedingAge();
 
-    protected int breed() {
+    private int breed() {
         int births = 0;
         if (canBreed() && RANDOM.nextDouble() <= getBreedingProbability()) {
             births = RANDOM.nextInt(getMaxLitterSize()) + 1;
@@ -112,12 +87,6 @@ public abstract class Animal {
         return births;
     }
 
-
-    /**
-     * A rabbit can breed if it has reached the breeding age.
-     *
-     * @return true if the rabbit can breed, false otherwise.
-     */
     private boolean canBreed() {
         return age >= getBreedingAge();
     }
@@ -127,8 +96,6 @@ public abstract class Animal {
     }
 
     private void giveBirth(List<Animal> newAnimals) {
-        // New animals are born into adjacent locations.
-        // Get a list of adjacent free locations.
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
         for (int b = 0; b < births && free.size() > 0; b++) {

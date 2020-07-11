@@ -3,9 +3,10 @@ package io.muic.ooc.fab;
 import java.awt.*;
 
 public enum AnimalType {
-    RABBIT(0.08,Rabbit.class,Color.ORANGE),
-    FOX(0.02,Fox.class,Color.BLUE),
-    TIGER(0.02,Tiger.class,Color.RED);
+    RABBIT(0.08,Rabbit.class,Color.ORANGE,9),
+    FOX(0.02,Fox.class,Color.BLUE,12),
+    TIGER(0.01,Tiger.class,Color.RED,15),
+    HUNTER(0.001,Hunter.class,Color.GREEN,0);
 
 
     private double breedingProbability;
@@ -13,11 +14,13 @@ public enum AnimalType {
     private Class animalClass;
 
     private Color color;
+    private  int foodValue;
 
-    AnimalType(double breedingProbability, Class animalClass,Color color) {
+    AnimalType(double breedingProbability, Class animalClass,Color color,int foodValue) {
         this.breedingProbability = breedingProbability;
         this.animalClass = animalClass;
         this.color = color;
+        this.foodValue = foodValue;
     }
 
     public double getBreedingProbability() {
@@ -31,4 +34,6 @@ public enum AnimalType {
     public Color getColor(){
         return color;
     }
+
+    public int getFoodValue(){return foodValue;}
 }

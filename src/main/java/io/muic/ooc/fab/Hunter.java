@@ -1,36 +1,32 @@
 package io.muic.ooc.fab;
 
-import java.util.Iterator;
-import java.util.List;
+public class Hunter extends Predator{
 
-public class Tiger extends Predator{
+    @Override
+    protected void setDead(){}
 
     @Override
     protected AnimalType[] getPrey() {
-        return new AnimalType[]{AnimalType.RABBIT,AnimalType.FOX};
+        return new AnimalType[]{AnimalType.FOX,AnimalType.RABBIT,AnimalType.TIGER};
     }
-
-
-
 
     @Override
     protected int getMaxAge() {
-        return 200;
+        return 100;
     }
 
     @Override
     protected double getBreedingProbability() {
-        return 0.08;
+        return 0.003;
     }
 
     @Override
     protected int getMaxLitterSize() {
-        return 2;
+        return 1;
     }
 
     @Override
     protected int getBreedingAge() {
-        return 30;
+        return 25;
     }
-
 }
